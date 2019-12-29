@@ -60,7 +60,7 @@ fileCount = getFileCount(directoryToScan)
 # Gives you the output of one roll, ready to paste into an excel doc
 print(currentRoll + '\t' + str(dirSize) + '\t' + str(fileCount) + '\t' + firstFile + '\t' + lastFile )
 
-
+# Test Commit
 
 # for dirs in os.listdir(directoryToScan):
 #     if dirs not in rejectFiles:
