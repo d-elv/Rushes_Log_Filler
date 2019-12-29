@@ -21,11 +21,11 @@ def getFileCount(folder):
     return fileCount
 
 
-# directoryToScan = input('Please drag the folder containing the rolls that require logging: ')
-directoryToScan = input('Please drag in the roll that requires logging: ')
+directoryToScan = input('Please drag the folder containing the rolls that require logging: ')
+# directoryToScan = input('Please drag in the roll that requires logging: ')
 
 
-def rollInfoGetter(directoryToScan):
+def rollInfoGetter(roll):
     fileListinRoll = []
     rollDirList = []
     firstFile = ''
@@ -34,7 +34,7 @@ def rollInfoGetter(directoryToScan):
     rejectFiles = ['.DS_Store', 'Thumbs.db']
     acceptedFiles = ['.mxf', '.mov', '.mp4', '.avi', '.vob', '.wav', '.aif', '.mp3', '.png', '.tif', '.jpg']
 
-    for root, path, file in os.walk(directoryToScan):
+    for root, path, file in os.walk(roll):
         rollDirList.append(root)
         for f in file:
             file_path = os.path.join(root + os.sep + f)
@@ -53,56 +53,28 @@ def rollInfoGetter(directoryToScan):
     currentRoll = currentRoll[-1]
 
     # Gives you the size of the roll
-    dirSize = getFolderSize(directoryToScan)
+    dirSize = getFolderSize(roll)
     dirSize = dirSize / 1000000
 
-    fileCount = getFileCount(directoryToScan)
+    fileCount = getFileCount(roll)
 
     # Gives you the output of one roll, ready to paste into an excel doc
     print(currentRoll + '\t' + str(dirSize) + '\t' + str(fileCount) + '\t' + firstFile + '\t' + lastFile )
 
+rootList = []
+dirsList = []
+rollDirsList = []
 
-rollInfoGetter(directoryToScan)
+for root, dirs, files in os.walk(directoryToScan):
+    rootList.append(root)
+    rootDir = rootList[0]
+    dirsList.append(dirs)
 
-
-
-
-
-
-
-# Test Commit 2
-
-# for dirs in os.listdir(directoryToScan):
-#     if dirs not in rejectFiles:
-#         rollList.append(dirs)
-#         rollSpecifier = str(dirs + '/')
-#     for root, dir, files in os.walk(directoryToScan):
-#         if dirs in root and rollSpecifier not in root:
-#             rollDirList.append(root)
-# for root, dirs, files in os.walk(rollDirList):
-#     print(files)
-
-    # rollNamepath = os.path.join(root, dirs)
-    # print(dirs[0])
-    # dirsSplit = str(dirs[0]).split()
-    # print(dirsSplit)
-    # print(rollNamepath)
-    # if root == directoryToScan:
+dirsList = sorted(dirsList[0])
 
 
-        # if root != directoryToScan:
+for item in dirsList:
+    rollDirsList.append(rootDir + '/' + item)
 
-
-
-# for root, path, file in os.walk(directoryToScan):
-#     for f in file:
-#         file_path = os.path.join(root + os.sep + f)
-#         name, ext = os.path.splitext(f)
-#         ext = ext.lower()
-#         if ext in acceptedFiles:
-#             fileListinRoll.append(f)
-#             fileListinRoll.sort()
-#             firstFile = fileListinRoll[0]
-#             lastFile = fileListinRoll[-1]
-#             rolls[dirs]['First File'] = firstFile
-#             rolls[dirs]['Last File'] = lastFile
+for roll in rollDirsList:
+    rollInfoGetter(roll)
