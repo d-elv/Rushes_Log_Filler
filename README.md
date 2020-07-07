@@ -6,8 +6,8 @@ camera cards labelled up and organised into their own folders.
 
 For example on a drive you could have folders labelled as such:
 
-CAMA_190920_FS7_001
-CAMB_190920_FS7_002
+CAMA_190920_FS7_001, 
+CAMB_190920_FS7_002, 
 GOP1_190921_GO_001
 
 Inside these folders there may be multiple folders & files that aren't necessarily relevant for logging, 
